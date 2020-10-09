@@ -21,8 +21,7 @@ const ProductScreen = ({ match }) => {
       setProduct(data);
     };
     fetchProduct();
-    // eslint-disable-next-line
-  }, []);
+  }, [match]);
   return (
     <>
       <Link className='btn btn-dark my-3' to='/'>
