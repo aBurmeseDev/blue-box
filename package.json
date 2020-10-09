@@ -1,0 +1,22 @@
+{
+  "name": "bluebox",
+  "version": "1.0.0",
+  "description": "MERN e-commerce",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aBurmeseDev/blue-box.git"
+  },
+  "author": "John Lwin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aBurmeseDev/blue-box/issues"
+  },
+  "homepage": "https://github.com/aBurmeseDev/blue-box#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
