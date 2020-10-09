@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -8,18 +8,21 @@ import {
   Card,
   Button,
   ListGroupItem,
-} from 'react-bootstrap'
-import Rating from '../components/Rating'
+} from 'react-bootstrap';
+import Rating from '../components/Rating';
+import axios from 'axios';
 
 const ProductScreen = ({ match }) => {
-  const [product, setProduct] = useState({})
+  const [product, setProduct] = useState({});
+
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${match.params.id}`)
-      setProduct(data)
-    }
-    fetchProduct()
-  }, [])
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+      setProduct(data);
+    };
+    fetchProduct();
+    // eslint-disable-next-line
+  }, []);
   return (
     <>
       <Link className='btn btn-dark my-3' to='/'>
@@ -78,7 +81,7 @@ const ProductScreen = ({ match }) => {
         </Col>
       </Row>
     </>
-  )
-}
+  );
+};
 
-export default ProductScreen
+export default ProductScreen;
