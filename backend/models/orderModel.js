@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const orderSchema = mongoose.Schema(
   {
@@ -10,7 +10,7 @@ const orderSchema = mongoose.Schema(
     orderItems: [
       {
         name: { type: String, required: true },
-        quantity: { type: Number, required: true },
+        qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
         product: {
@@ -71,8 +71,8 @@ const orderSchema = mongoose.Schema(
   {
     timestamp: true,
   }
-);
+)
 
-const Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.model('Order', orderSchema)
 
-export default Order;
+export default Order
