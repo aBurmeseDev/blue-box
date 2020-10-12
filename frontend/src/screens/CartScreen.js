@@ -33,12 +33,10 @@ const CartScreen = ({ match, location, history }) => {
   }, [dispatch, productId, qty])
 
   const removeFromCartHander = (id) => {
-    console.log('remove')
     dispatch(removeFromCart(id))
   }
 
   const checkoutHandler = () => {
-    console.log('checkout')
     history.push('/login?redirect==shipping')
   }
 
