@@ -54,7 +54,7 @@ const LoginScreen = ({ location, history }) => {
           ></FormControl>
         </FormGroup>
         <FormGroup controlId='password'>
-          <FormLabel>Email Address</FormLabel>
+          <FormLabel>Password</FormLabel>
           <FormControl
             type='password'
             placeholder='Enter password'
