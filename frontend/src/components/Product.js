@@ -6,7 +6,7 @@ import Rating from './Rating'
 
 const Product = ({ product, color }) => {
   return (
-    <Card className='my-3 p-3 rounded'>
+    <Card className='my-3 p-3 rounded border-light'>
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant='top' />
       </Link>
@@ -14,25 +14,21 @@ const Product = ({ product, color }) => {
       <Card.Body>
         <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
-            <strong style={{ color }}>{product.name}</strong>
+            <p style={{ color }}>{product.name}</p>
           </Card.Title>
         </Link>
+        <Card.Text as='h5'>${product.price}</Card.Text>
 
         <Card.Text as='div'>
-          <Rating
-            value={product.rating}
-            text={`${product.numReviews} reviews`}
-          />
+          <Rating value={product.rating} text={`(${product.numReviews})`} />
         </Card.Text>
-
-        <Card.Text as='h3'>${product.price}</Card.Text>
       </Card.Body>
     </Card>
   )
 }
 
 Product.defaultProps = {
-  color: '#0000ff',
+  color: '#000',
 }
 
 Product.propTypes = {

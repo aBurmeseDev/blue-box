@@ -64,13 +64,14 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
-      <span>{text && text}</span>
+
+      <small>{text && text}</small>
     </div>
   )
 }
 
 Rating.defaultProps = {
-  color: '#0000ff',
+  color: '#4582ec',
 }
 
 Rating.propTypes = {

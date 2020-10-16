@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Row,
   Col,
@@ -10,30 +10,31 @@ import {
   Button,
   ListGroupItem,
   Form,
-} from 'react-bootstrap';
-import Rating from '../components/Rating';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import { listProductDetails } from '../actions/productActions';
+  Container,
+} from 'react-bootstrap'
+import Rating from '../components/Rating'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listProductDetails } from '../actions/productActions'
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(1);
-  const dispatch = useDispatch();
+  const [qty, setQty] = useState(1)
+  const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails);
-  const { loading, product, error } = productDetails;
+  const productDetails = useSelector((state) => state.productDetails)
+  const { loading, product, error } = productDetails
 
   useEffect(() => {
-    dispatch(listProductDetails(match.params.id));
-  }, [dispatch, match]);
+    dispatch(listProductDetails(match.params.id))
+  }, [dispatch, match])
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}/?qty=${qty}`);
-  };
+    history.push(`/cart/${match.params.id}/?qty=${qty}`)
+  }
 
   return (
-    <>
-      <Link className='btn btn-dark my-3' to='/'>
+    <Container fluid>
+      <Link className='btn btn-outline-primary my-3' to='/'>
         Back
       </Link>
       {loading ? (
@@ -42,26 +43,25 @@ const ProductScreen = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          <Col md={6}>
+          <Col lg={6}>
             <Image src={product.image} alt={product.name} fluid />
           </Col>
-          <Col md={3}>
+          <Col lg={6}>
             <ListGroup variant='flush'>
               <ListGroupItem>
-                <h3>{product.name}</h3>
+                <h5>{product.name}</h5>
               </ListGroupItem>
               <ListGroupItem>
                 <Rating
                   value={product.rating}
-                  text={`${product.numReviews} reviews`}
+                  text={`${product.numReviews} ratings`}
                 />
               </ListGroupItem>
               <ListGroupItem>Price: ${product.price}</ListGroupItem>
               <ListGroupItem>Description: {product.description}</ListGroupItem>
             </ListGroup>
-          </Col>
-          <Col md={3}>
-            <Card>
+
+            <Card className='my-3 p-3 rounded '>
               <ListGroup variant='flush'>
                 <ListGroupItem>
                   <Row>
@@ -115,8 +115,8 @@ const ProductScreen = ({ history, match }) => {
           </Col>
         </Row>
       )}
-    </>
-  );
-};
+    </Container>
+  )
+}
 
-export default ProductScreen;
+export default ProductScreen
