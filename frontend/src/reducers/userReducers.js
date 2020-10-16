@@ -42,13 +42,12 @@ export const userRegisterReducers = (state = {}, action) => {
       return state
   }
 }
-
-export const userDetailsReducers = (state = {}, action) => {
+export const userDetailsReducers = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return { ...state, loading: true }
     case USER_DETAILS_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { loading: false, user: action.payload }
     case USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }
 
@@ -56,7 +55,6 @@ export const userDetailsReducers = (state = {}, action) => {
       return state
   }
 }
-
 export const userUpdateProfileReducers = (state = {}, action) => {
   switch (action.type) {
     case USER_UPDATE_PROFILE_REQUEST:
