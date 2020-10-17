@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Checkout from '../components/Checkout'
 import { createOrder } from '../actions/orderActions'
-import { orderCreateReducer } from '../reducers/orderReducers'
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
