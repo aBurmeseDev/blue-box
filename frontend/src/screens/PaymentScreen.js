@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Form,
-  Button,
-  Col,
-  FormGroup,
-  FormLabel,
-  FormCheck,
-} from 'react-bootstrap'
+import { Form, Button, Col, FormGroup, FormCheck } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import Checkout from '../components/Checkout'
@@ -26,7 +19,7 @@ const PaymentScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(savePaymentMethod({ paymentMethod }))
+    dispatch(savePaymentMethod(paymentMethod))
     history.push('/placeorder')
   }
 
