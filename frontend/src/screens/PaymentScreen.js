@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import {
   Form,
   Button,
-  Row,
   Col,
   FormGroup,
-  FormControl,
   FormLabel,
-  FormCheck
+  FormCheck,
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
@@ -35,19 +33,32 @@ const PaymentScreen = ({ history }) => {
   return (
     <FormContainer>
       <Checkout step1 step2 step3 />
-      <h2>Payment Method</h2>
+      <h5>Select Payment</h5>
       <Form onSubmit={submitHandler}>
-       <FormGroup>
-           <FormLabel as='legend'>
-Select Method
-           </FormLabel>
-       </FormGroup>
-       
-       <Col>
-       <FormCheck type='radio' label='PayPal or Credit Card' id='PayPal' name='paymentMethod' value='PayPal' checked onChange={(e)=> setPaymentMethod(e.target.value)}></FormCheck>
-       <FormCheck type='radio' label='Stripe' id='Stripe' name='paymentMethod' value='Stripe' onChange={(e)=> setPaymentMethod(e.target.value)}></FormCheck>
-       </Col>
-        
+        <FormGroup>
+          {/* <FormLabel as='legend'>Select Payment</FormLabel> */}
+
+          <Col>
+            <FormCheck
+              type='radio'
+              label='PayPal or Credit Card'
+              id='PayPal'
+              name='paymentMethod'
+              value='PayPal'
+              checked
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></FormCheck>
+            {/* <FormCheck
+              type='radio'
+              label='Stripe'
+              id='Stripe'
+              name='paymentMethod'
+              value='Stripe'
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></FormCheck> */}
+          </Col>
+        </FormGroup>
+
         <Button type='submit' variant='primary'>
           Continue
         </Button>
