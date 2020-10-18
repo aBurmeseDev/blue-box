@@ -3,7 +3,6 @@ import axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { Link } from 'react-router-dom'
 import {
-  Button,
   ListGroup,
   Image,
   Card,
@@ -14,7 +13,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, payOrder } from '../actions/orderActions'
+import { ORDER_PAY_RESET } from '../constants/orderConstants'
 
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id
@@ -30,9 +30,9 @@ const OrderScreen = ({ match }) => {
   const { loading: loadingPay, success: successPay } = orderPay
 
   if (!loading) {
-    const addDecimals = (num) => {
-      return Math.round(num * 100).toFixed(2)
-    }
+    // const addDecimals = (num) => {
+    //   return Math.round(num * 100).toFixed(2)
+    // }
 
     // Calculate prices
     order.itemsPrice = order.orderItems.reduce(
@@ -54,7 +54,8 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script)
     }
 
-    if (!order || order._id !== orderId) {
+    if (!order || successPay) {
+      dispatch({ type: ORDER_PAY_RESET })
       dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -63,7 +64,12 @@ const OrderScreen = ({ match }) => {
         setSdkReady(true)
       }
     }
-  }, [dispatch, orderId])
+  }, [dispatch, orderId, successPay, order])
+
+  const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(orderId, paymentResult))
+    console.log(paymentResult)
+  }
 
   return loading ? (
     <Loader />
@@ -76,7 +82,7 @@ const OrderScreen = ({ match }) => {
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroupItem>
-              <h2>shipping</h2>
+              <h2>Shipping</h2>
               <p>
                 <strong>Name: </strong> {order.user.name}
               </p>
@@ -100,7 +106,7 @@ const OrderScreen = ({ match }) => {
             </ListGroupItem>
 
             <ListGroupItem>
-              <h2>payment method</h2>
+              <h2>Payment Method</h2>
               <p>
                 <strong>Method: </strong>
                 {order.paymentMethod}
@@ -113,7 +119,7 @@ const OrderScreen = ({ match }) => {
             </ListGroupItem>
 
             <ListGroupItem>
-              <h2>order items</h2>
+              <h2>Order Items</h2>
               {order.orderItems.length === 0 ? (
                 <Message>Order Is Empty</Message>
               ) : (
@@ -181,6 +187,7 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroupItem>
+
               {!order.isPaid && (
                 <ListGroupItem>
                   {loadingPay && <Loader />}
