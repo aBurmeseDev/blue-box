@@ -13,6 +13,7 @@ import {
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_FAIL,
 } from '../constants/orderConstants'
+import { logout } from './userActions'
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -120,7 +121,9 @@ export const payOrder = (orderId, paymentResult) => async (
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
     dispatch({
       type: ORDER_PAY_FAIL,
       payload: message,
@@ -155,7 +158,9 @@ export const listMyOrders = () => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
     dispatch({
       type: ORDER_LIST_MY_FAIL,
       payload: message,
