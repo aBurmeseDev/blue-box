@@ -15,7 +15,13 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar
+        bg='light'
+        variant='dark'
+        expand='lg'
+        className='bluebtn'
+        collapseOnSelect
+      >
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>BlueBox</Navbar.Brand>
@@ -25,7 +31,11 @@ const Header = () => {
             <Nav className='mr-auto'>
               {' '}
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='System Admin' id='adminmenu'>
+                <NavDropdown
+                  title='System Admin'
+                  id='adminmenu'
+                  className='active'
+                >
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
